@@ -1,120 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor Verification</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-            background-color: #f4f4f9; /* Light grey background */
-        }
-        form {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #fff; /* White form background */
-        }
-        input[type="text"], input[type="date"], input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50; /* Green button */
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049; /* Darker green on hover */
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-            color: #333;
-        }
-    </style>
-    <!-- EmailJS SDK script -->
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/utc.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/timezone.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/customParseFormat.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Lookup</title>
 </head>
 <body>
-    <h2>Attendance Verification</h2>
-    <form id="attendanceForm">
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="firstname" required>
+  <h1>Vendor Lookup</h1>
 
-        <label for="lname">Last Name:</label>
-        <input type="text" id="lname" name="lastname" required>
+  <!-- Dropdown for vendor categories -->
+  <label for="vendor-category">Select Vendor Category:</label>
+  <select id="vendor-category" onchange="populateSubcategories()">
+    <option value="">--Select Category--</option>
+    <option value="Landscaping Services">Landscaping Services</option>
+    <option value="Maintenance and Repairs">Maintenance and Repairs</option>
+    <option value="Safety and Security">Safety and Security</option>
+    <!-- Add all categories here -->
+  </select>
 
-        <label for="date">Date of Attendance:</label>
-        <input type="date" id="date" name="date" required>
+  <!-- Dropdown for vendor subcategories -->
+  <label for="vendor-subcategory">Select Vendor Subcategory:</label>
+  <select id="vendor-subcategory" onchange="filterVendors()">
+    <option value="">--Select Subcategory--</option>
+    <!-- Subcategories will be populated based on the selected category -->
+  </select>
 
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" required>
+  <!-- Display filtered vendors -->
+  <div id="vendor-list"></div>
 
-        <input type="submit" value="Submit">
-    </form>
-
-    <script type="text/javascript">
-        // Initialize EmailJS with your public key
-        (function() {
-            emailjs.init({
-                publicKey: "_7rIdDEfftg8MsaPA" // Your actual public key
-            });
-        })();
-
-        // Extend Day.js with necessary plugins
-        dayjs.extend(dayjs_plugin_utc);
-        dayjs.extend(dayjs_plugin_timezone);
-        dayjs.extend(dayjs_plugin_customParseFormat);
-
-        // Autofill the date field with today's date adjusted to the user's local timezone
-        const today = dayjs().tz(dayjs.tz.guess()).format('YYYY-MM-DD');
-        document.getElementById('date').value = today;
-
-        document.getElementById('attendanceForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Get form data
-            const firstName = document.getElementById('fname').value;
-            const lastName = document.getElementById('lname').value;
-            const dateInput = document.getElementById('date').value;
-            const toEmail = document.getElementById('email').value;
-
-            // Reformat date from YYYY-MM-DD to MMDDYY
-            const date = dayjs(dateInput).format('MMDDYY');
-
-            // Send email using EmailJS
-            emailjs.send("service_zuz45mi", "template_z61k7if", {
-                to_email: toEmail,
-                to_name: firstName + " " + lastName,
-                date_of_attendance: date,
-            })
-            .then(function(response) {
-                alert('Email sent successfully!');
-            }, function(error) {
-                alert('Failed to send email. Error: ' + JSON.stringify(error));
-            });
-        });
-    </script>
+  <script src="app.js"></script>
 </body>
 </html>
