@@ -1,9 +1,9 @@
-// Define categories and subcategories
+// Define categories and subcategories (you can also derive this dynamically from the CSV file if needed)
 const vendorData = {
-  "Landscaping Services": ["Landscaping Contractors", "Tree Services", "Irrigation Specialists"],
+  "Landscaping Services": ["Landscape Contractors", "Tree Services", "Irrigation Specialists"],
   "Maintenance and Repairs": ["General Contractors", "Plumbing Services", "Electricians", "HVAC Services", "Roofing Contractors"],
   "Safety and Security": ["Security Services", "Fire Safety Inspectors", "Pest Control Services"],
-  // Add all the other categories and subcategories here
+  // Add all other categories and subcategories
 };
 
 // Store vendors (to be loaded from CSV later)
@@ -42,7 +42,7 @@ function populateSubcategories() {
   }
 }
 
-// Filter vendors based on selected subcategory
+// Filter vendors by selected subcategory and display relevant information
 function filterVendors() {
   const selectedSubcategory = document.getElementById('vendor-subcategory').value;
   const vendorList = document.getElementById('vendor-list');
@@ -50,14 +50,14 @@ function filterVendors() {
   // Clear previous results
   vendorList.innerHTML = '';
 
-  // Filter vendors by subcategory
+  // Filter vendors by the selected subcategory
   const filteredVendors = vendors.filter(vendor => vendor.Item === selectedSubcategory);
 
   // Display filtered vendors
   if (filteredVendors.length > 0) {
     filteredVendors.forEach(vendor => {
       const vendorInfo = document.createElement('p');
-      vendorInfo.textContent = `Name: ${vendor.VendorName}, Contact: ${vendor.ContactInfo}`;
+      vendorInfo.textContent = `Name: ${vendor['Vendor Name']}, Contact: ${vendor['Contact Name']}, Phone: ${vendor['Vendor Number']}, Email: ${vendor['Vendor Email']}`;
       vendorList.appendChild(vendorInfo);
     });
   } else {
