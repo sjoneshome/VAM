@@ -78,7 +78,7 @@
         // Initialize EmailJS with your public key
         (function() {
             emailjs.init({
-                publicKey: "TODO" // Your actual public key
+                publicKey: "_7rIdDEfftg8MsaPA" // Your actual public key
             });
         })();
 
@@ -104,7 +104,7 @@
             const date = dayjs(dateInput).format('MMDDYY');
 
             // Send email using EmailJS
-            emailjs.send("service_TODO", "template_TODO", {
+            emailjs.send("service_zuz45mi", "template_z61k7if", {
                 to_email: toEmail,
                 to_name: firstName + " " + lastName,
                 date_of_attendance: date,
