@@ -32,7 +32,7 @@ function deriveCategoriesAndSubcategories() {
       vendorData[category] = new Set();
     }
 
-    // Add subcategory to the Set of the corresponding category
+    // Add subcategory exactly as it appears in CSV
     vendorData[category].add(subcategory);
   });
 
