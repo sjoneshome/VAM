@@ -90,10 +90,13 @@ function filterVendors() {
   // Clear previous results
   vendorList.innerHTML = '';
 
-  // Filter vendors by selected subcategory and county
+  // Filter vendors by selected subcategory and optionally by county
   const filteredVendors = vendors.filter(vendor => {
     const matchesSubcategory = vendor.Item === selectedSubcategory;
-    const matchesCounty = selectedCounty ? vendor[selectedCounty] === "True" : true;  // Check county only if selected
+
+    // Only check county if one is selected; otherwise, skip this condition
+    const matchesCounty = selectedCounty ? vendor[selectedCounty] === "True" : true;
+
     return matchesSubcategory && matchesCounty;
   });
 
