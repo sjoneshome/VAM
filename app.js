@@ -100,7 +100,7 @@ function filterVendors() {
   const filteredVendors = vendors.filter(vendor => {
     const matchesSubcategory = vendor.Item === selectedSubcategory;
 
-    // Check county if one is selected; skip if none selected
+    // Only check county if one is selected; skip if none selected
     const matchesCounty = selectedCounty ? vendor[selectedCounty] === "True" : true;
 
     console.log('Vendor:', vendor['Vendor Name'], '| Subcategory Match:', matchesSubcategory, '| County Match:', matchesCounty);  // Debugging line
