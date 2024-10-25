@@ -1,6 +1,6 @@
 // Store vendors (to be loaded from CSV later)
 let vendors = [];
-let vendorData = {};  // Will hold dynamically derived categories and subcategories
+let vendorData = {};  // Will hold dynamically derived categories and subcategories 
 
 // Load and parse CSV file using PapaParse
 document.addEventListener('DOMContentLoaded', function() {
