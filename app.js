@@ -100,10 +100,10 @@ function filterVendors() {
   const filteredVendors = vendors.filter(vendor => {
     const matchesSubcategory = vendor.Item === selectedSubcategory;
 
-    // Only check county if one is selected; skip if none selected
-    const matchesCounty = selectedCounty ? vendor[selectedCounty] === "True" : true;
+    // Standardized comparison for county values (case-insensitive and trimmed)
+    const matchesCounty = selectedCounty ? (vendor[selectedCounty]?.trim().toLowerCase() === "true") : true;
 
-    console.log('Vendor:', vendor['Vendor Name'], '| Subcategory Match:', matchesSubcategory, '| County Match:', matchesCounty);  // Debugging line
+    console.log('Vendor:', vendor['Vendor Name'], '| County Value:', vendor[selectedCounty], '| County Match:', matchesCounty);  // Debugging line
 
     return matchesSubcategory && matchesCounty;
   });
