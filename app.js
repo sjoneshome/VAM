@@ -110,11 +110,16 @@ function filterVendors() {
 
   console.log('Filtered vendors:', filteredVendors);  // Debugging line
 
-  // Display filtered vendors
+  // Display filtered vendors with line breaks for each piece of information
   if (filteredVendors.length > 0) {
     filteredVendors.forEach(vendor => {
       const vendorInfo = document.createElement('p');
-      vendorInfo.textContent = `Name: ${vendor['Vendor Name']}, Contact: ${vendor['Contact Name']}, Phone: ${vendor['Vendor Number']}, Email: ${vendor['Vendor Email']}`;
+      vendorInfo.innerHTML = `
+        <span class="vendor-info">Name: ${vendor['Vendor Name']}</span><br>
+        <span class="vendor-info">Contact: ${vendor['Contact Name']}</span><br>
+        <span class="vendor-info">Phone: ${vendor['Vendor Number']}</span><br>
+        <span class="vendor-info">Email: ${vendor['Vendor Email']}</span>
+      `;
       vendorList.appendChild(vendorInfo);
     });
   } else {
