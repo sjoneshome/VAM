@@ -15,33 +15,21 @@
     <label for="vendor-category">Select Vendor Category:</label>
     <select id="vendor-category" onchange="populateSubcategories()">
       <option value="">--Select Category--</option>
-      <option value="Landscaping Services">Landscaping Services</option>
-      <option value="Maintenance and Repairs">Maintenance and Repairs</option>
-      <option value="Safety and Security">Safety and Security</option>
-      <option value="Amenities and Community Areas">Amenities and Community Areas</option>
-      <option value="Specialty Services">Specialty Services</option>
-      <option value="Technology and Communication">Technology and Communication</option>
-      <option value="Roads and Infrastructure">Roads and Infrastructure</option>
-      <option value="Lighting and Signage">Lighting and Signage</option>
-      <option value="Parking and Traffic Management">Parking and Traffic Management</option>
-      <option value="Environmental Sustainability">Environmental Sustainability</option>
-      <option value="Pet Waste Management">Pet Waste Management</option>
-      <option value="Community Beautification">Community Beautification</option>
-      <option value="Emergency Preparedness">Emergency Preparedness</option>
-      <option value="Energy and Utility Management">Energy and Utility Management</option>
-      <option value="Vendor and Contract Management">Vendor and Contract Management</option>
-      <option value="Community Facilities Management">Community Facilities Management</option>
-      <option value="Planning and Development">Planning and Development</option>
-      <option value="Environmental and Sustainability Consulting">Environmental and Sustainability Consulting</option>
-      <option value="Accessibility and ADA Compliance">Accessibility and ADA Compliance</option>
-      <option value="Disaster Recovery and Restoration">Disaster Recovery and Restoration</option>
     </select>
 
     <!-- Dropdown for vendor subcategories -->
     <label for="vendor-subcategory">Select Vendor Subcategory:</label>
-    <select id="vendor-subcategory" onchange="filterVendors()">
+    <select id="vendor-subcategory" onchange="populateCounties()">
       <option value="">--Select Subcategory--</option>
-      <!-- Subcategories will be populated based on the selected category -->
+    </select>
+
+    <!-- Dropdown for county filter (optional) -->
+    <label for="vendor-county">Filter by County (Optional):</label>
+    <select id="vendor-county" onchange="filterVendors()">
+      <option value="">--Select County--</option>
+      <option value="Davis County">Davis County</option>
+      <option value="Utah County">Utah County</option>
+      <option value="Salt Lake County">Salt Lake County</option>
     </select>
 
     <!-- Display filtered vendors -->
