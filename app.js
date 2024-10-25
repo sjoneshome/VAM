@@ -1,6 +1,6 @@
 // Store vendors (to be loaded from CSV later)
 let vendors = [];
-let vendorData = {};  // Will hold dynamically derived categories and subcategories 
+let vendorData = {};  // Will hold dynamically derived categories and subcategories
 
 // Load and parse CSV file using PapaParse
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     header: true,
     complete: function(results) {
       vendors = results.data;
+      console.log('Vendors loaded:', vendors); // Debugging line
 
       // Dynamically derive categories and subcategories
       deriveCategoriesAndSubcategories();
@@ -26,6 +27,8 @@ function deriveCategoriesAndSubcategories() {
   vendors.forEach(vendor => {
     const category = vendor.Category;
     const subcategory = vendor.Item;
+    
+    console.log('Processing vendor - Category:', category, 'Subcategory:', subcategory);  // Debugging line
 
     // Initialize category if it doesn't exist in vendorData
     if (!vendorData[category]) {
@@ -40,6 +43,7 @@ function deriveCategoriesAndSubcategories() {
   for (let category in vendorData) {
     vendorData[category] = Array.from(vendorData[category]);
   }
+  console.log('Derived vendor data:', vendorData);  // Debugging line
 }
 
 // Populate the category dropdown with dynamic data
@@ -90,15 +94,21 @@ function filterVendors() {
   // Clear previous results
   vendorList.innerHTML = '';
 
+  console.log('Selected subcategory:', selectedSubcategory, 'Selected county:', selectedCounty);  // Debugging line
+
   // Filter vendors by selected subcategory and optionally by county
   const filteredVendors = vendors.filter(vendor => {
     const matchesSubcategory = vendor.Item === selectedSubcategory;
 
-    // Only check county if one is selected; otherwise, skip this condition
+    // Check county if one is selected; skip if none selected
     const matchesCounty = selectedCounty ? vendor[selectedCounty] === "True" : true;
+
+    console.log('Vendor:', vendor['Vendor Name'], '| Subcategory Match:', matchesSubcategory, '| County Match:', matchesCounty);  // Debugging line
 
     return matchesSubcategory && matchesCounty;
   });
+
+  console.log('Filtered vendors:', filteredVendors);  // Debugging line
 
   // Display filtered vendors
   if (filteredVendors.length > 0) {
