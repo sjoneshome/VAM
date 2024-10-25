@@ -76,18 +76,26 @@ function populateSubcategories() {
       subcategorySelect.appendChild(option);
     });
   }
+
+  // Clear county dropdown since subcategory has changed
+  document.getElementById('vendor-county').selectedIndex = 0;
 }
 
-// Filter vendors by selected subcategory and display relevant information
+// Filter vendors by selected subcategory and county, and display relevant information
 function filterVendors() {
   const selectedSubcategory = document.getElementById('vendor-subcategory').value;
+  const selectedCounty = document.getElementById('vendor-county').value;
   const vendorList = document.getElementById('vendor-list');
   
   // Clear previous results
   vendorList.innerHTML = '';
 
-  // Filter vendors by the selected subcategory
-  const filteredVendors = vendors.filter(vendor => vendor.Item === selectedSubcategory);
+  // Filter vendors by selected subcategory and county
+  const filteredVendors = vendors.filter(vendor => {
+    const matchesSubcategory = vendor.Item === selectedSubcategory;
+    const matchesCounty = selectedCounty ? vendor[selectedCounty] === "True" : true;  // Check county only if selected
+    return matchesSubcategory && matchesCounty;
+  });
 
   // Display filtered vendors
   if (filteredVendors.length > 0) {
@@ -97,6 +105,6 @@ function filterVendors() {
       vendorList.appendChild(vendorInfo);
     });
   } else {
-    vendorList.textContent = 'No vendors found for this subcategory.';
+    vendorList.textContent = 'No vendors found for this subcategory and county.';
   }
 }
