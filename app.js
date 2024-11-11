@@ -120,6 +120,18 @@ function filterVendors() {
         <span class="vendor-info">Phone: ${vendor['Vendor Number']}</span><br>
         <span class="vendor-info">Email: ${vendor['Vendor Email']}</span>
       `;
+
+      // Check if "Previously Used" column is marked as "TRUE" and add image if so
+      if (vendor['Previously Used']?.trim().toLowerCase() === "true") {
+        const image = document.createElement('img');
+        image.src = 'Image_VAM.png'; // Ensure this image is uploaded in the correct directory
+        image.alt = 'Previously Used';
+        image.style.width = '20px'; // Adjust size as needed
+        image.style.height = '20px'; // Adjust size as needed
+        image.style.marginLeft = '10px';
+        vendorInfo.appendChild(image);
+      }
+
       vendorList.appendChild(vendorInfo);
     });
   } else {
